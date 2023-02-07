@@ -1,8 +1,9 @@
 package com.example.insurancemanagement.entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-@Entity
+
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

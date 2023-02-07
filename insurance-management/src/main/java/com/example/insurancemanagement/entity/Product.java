@@ -1,5 +1,6 @@
 package com.example.insurancemanagement.entity;
 
+
 public class Product{
     private Long id;
     private String product_name;
