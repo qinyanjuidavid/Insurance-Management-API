@@ -22,7 +22,6 @@ public class Policy {
     private LocalDate coverageStartDate;
     private LocalDate coverageEndDate;
 
-    // getters and setters
 
     public Policy(Long id, Client client, Product product, String policyNumber, LocalDate issueDate, LocalDate coverageStartDate, LocalDate coverageEndDate) {
         this.id = id;
@@ -91,5 +90,11 @@ public class Policy {
     }
 
 
-    
+    @Override
+    public String toString() {
+        return "Policy [client=" + client + ", coverageEndDate=" + coverageEndDate + ", coverageStartDate="
+                + coverageStartDate + ", id=" + id + ", issueDate=" + issueDate + ", policyNumber=" + policyNumber
+                + ", product=" + product + "]";
+    }
+
 }
