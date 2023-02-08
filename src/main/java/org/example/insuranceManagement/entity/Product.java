@@ -1,18 +1,33 @@
 package org.example.insuranceManagement.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 
-@Entity
-@Table(name = "product")
+@Entity(name = "Product")
+@Table(name = "product",uniqueConstraints = {
+    @UniqueConstraint(name = "product_name_unique", columnNames = "product_name")
+})
 public class Product {
     @Id
+    @SequenceGenerator(name = "product_sequence", sequenceName = "product_sequence", allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "product_sequence")
+    @Column(name = "id", updatable = false)
     private Long id;
+    @Column(name = "product_name", nullable = false, columnDefinition = "TEXT")
     private String product_name;
+    @Column(name = "description", nullable = true, columnDefinition = "TEXT")
     private String description;
+    @Column(name = "product_type", nullable = true, columnDefinition = "TEXT")
     private String product_type;
+    
+    @Column(name = "price", nullable = false, columnDefinition = "float")
     private double price;
 
     public Product(
