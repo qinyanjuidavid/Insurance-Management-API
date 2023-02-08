@@ -30,7 +30,9 @@ public class Product {
     @Column(name = "price", nullable = false, columnDefinition = "float")
     private double price;
 
-    public Product(
+    public Product(){}
+
+     public Product(
         Long id,
         String product_name,
         String description,
@@ -38,6 +40,19 @@ public class Product {
         double price
     ) {
         this.id = id;
+        this.product_name = product_name;
+        this.description = description;
+        this.product_type = product_type;
+        this.price = price;
+    }
+
+    public Product(
+    
+        String product_name,
+        String description,
+        String product_type,
+        double price
+    ) {
         this.product_name = product_name;
         this.description = description;
         this.product_type = product_type;
