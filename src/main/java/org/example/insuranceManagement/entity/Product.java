@@ -1,20 +1,35 @@
-package com.example.insurancemanagement.entity;
+package org.example.insuranceManagement.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 
-public class Product{
+@Entity
+@Table(name = "product")
+public class Product {
+    @Id
     private Long id;
     private String product_name;
     private String description;
     private String product_type;
     private double price;
 
-    public Product(Long id, String product_name, String description, String product_type, double price) {
+    public Product(
+        Long id,
+        String product_name,
+        String description,
+        String product_type,
+        double price
+    ) {
         this.id = id;
         this.product_name = product_name;
         this.description = description;
+        this.product_type = product_type;
         this.price = price;
     }
 
+    //getters and setters
     public Long getId() {
         return id;
     }
@@ -52,4 +67,11 @@ public class Product{
         return price;
     }
 
+    @Override
+    public String toString() {
+        return "Product [description=" + description + ", id=" + id + ", price=" + price + ", product_name=" + product_name
+                + ", product_type=" + product_type + "]";
+    }
+     
+    
 }
