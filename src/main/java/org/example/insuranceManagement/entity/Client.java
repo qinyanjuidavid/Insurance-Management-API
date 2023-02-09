@@ -13,11 +13,11 @@ import jakarta.persistence.UniqueConstraint;
 @Table(name = "client",uniqueConstraints = {
     @UniqueConstraint(
         name = "client_email_unique",
-        columnNames = "email"
+        columnNames = "client_email"
         ),
     @UniqueConstraint(
         name = "client_phone_unique", 
-        columnNames = "phone"
+        columnNames = "client_phone"
         ),
 })
 public class Client {
@@ -36,9 +36,9 @@ public class Client {
     private String name;
     @Column(name = "address", nullable = true, columnDefinition = "TEXT")
     private String address;
-    @Column(name = "phone", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "client_phone", nullable = false, columnDefinition = "TEXT")
     private String phone;
-    @Column(name = "email", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "client_email", nullable = false, columnDefinition = "TEXT")
     private String email;
     @Column(name = "next_of_kin", nullable = true, columnDefinition = "TEXT")
     private String nextOfKin;

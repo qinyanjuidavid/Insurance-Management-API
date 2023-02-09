@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.example.insuranceManagement.entity.Client;
 
 public interface ClientRepository extends JpaRepository<Client,Long> {
-    
-    Optional<Client> findByClientEmail(String clientEmail);
+
+    Optional<Client> findByEmail(String email);
+
+    Optional<Client> findByPhone(String phone);
 }
