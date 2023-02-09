@@ -13,9 +13,11 @@ import jakarta.persistence.UniqueConstraint;
 @Entity(name = "Product")
 @Table(name = "product",
 uniqueConstraints = {
-    @UniqueConstraint(name = "product_name_unique", columnNames = "product_name")
-}
-)
+    @UniqueConstraint(
+        name = "product_name_unique", 
+        columnNames = "product_name"
+        )
+})
 public class Product {
     @Id
     @SequenceGenerator(
@@ -31,7 +33,6 @@ public class Product {
     private String description;
     @Column(name = "product_type", nullable = true, columnDefinition = "TEXT")
     private String productType;
-    
     @Column(name = "price", nullable = false, columnDefinition = "float")
     private double price;
 
@@ -52,7 +53,6 @@ public class Product {
     }
 
     public Product(
-    
         String productName,
         String description,
         String productType,

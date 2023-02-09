@@ -15,7 +15,9 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity(name = "Policy")
 @Table(name = "policy", uniqueConstraints = {
-    @UniqueConstraint(name = "policy_policy_number_unique", columnNames = "policy_number"),
+    @UniqueConstraint(
+        name = "policy_policy_number_unique", 
+        columnNames = "policy_number"),
 })
 public class Policy {
     @Id
@@ -37,6 +39,12 @@ public class Policy {
     private LocalDate coverageStartDate;
     @Column(name = "coverage_end_date", nullable = false)
     private LocalDate coverageEndDate;
+    @Column(name = "beneficiaries", nullable = true, columnDefinition = "TEXT")
+    private String beneficiaries;
+    @Column(name = "beneficiaries_phone", nullable = true, columnDefinition = "TEXT")
+    private String beneficiariesPhone;
+    @Column(name = "beneficiaries_email", nullable = true, columnDefinition = "TEXT")
+    private String beneficiariesEmail;
 
     public Policy(
         Long id,

@@ -11,14 +11,26 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity(name = "Client")
 @Table(name = "client",uniqueConstraints = {
-    @UniqueConstraint(name = "client_email_unique", columnNames = "email"),
-    @UniqueConstraint(name = "client_phone_unique", columnNames = "phone"),
+    @UniqueConstraint(
+        name = "client_email_unique",
+        columnNames = "email"
+        ),
+    @UniqueConstraint(
+        name = "client_phone_unique", 
+        columnNames = "phone"
+        ),
 })
 public class Client {
     @Id
-    @SequenceGenerator(name = "client_sequence", sequenceName = "client_sequence", allocationSize = 1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "client_sequence")
-    @Column(name = "id", updatable = false)
+    @SequenceGenerator(
+        name = "client_sequence", 
+        sequenceName = "client_sequence", 
+        allocationSize = 1)
+    @GeneratedValue(
+        strategy=GenerationType.SEQUENCE, 
+        generator = "client_sequence")
+    @Column(
+        name = "id", updatable = false)
     private Long id;
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
     private String name;
@@ -34,12 +46,8 @@ public class Client {
     private String nextOfKinPhone;
     @Column(name = "next_of_kin_email", nullable = true, columnDefinition = "TEXT")
     private String nextOfKinEmail;
-    @Column(name = "beneficiaries", nullable = true, columnDefinition = "TEXT")
-    private String beneficiaries;
-    @Column(name = "beneficiaries_phone", nullable = true, columnDefinition = "TEXT")
-    private String beneficiariesPhone;
-    @Column(name = "beneficiaries_email", nullable = true, columnDefinition = "TEXT")
-    private String beneficiariesEmail;
+   
+    public Client(){}
 
     public Client(
         Long id,
@@ -49,10 +57,7 @@ public class Client {
         String email,
         String nextOfKin,
         String nextOfKinPhone,
-        String nextOfKinEmail,
-        String beneficiaries,
-        String beneficiariesPhone,
-        String beneficiariesEmail
+        String nextOfKinEmail
     ) {
         this.id = id;
         this.name = name;
@@ -62,9 +67,24 @@ public class Client {
         this.nextOfKin = nextOfKin;
         this.nextOfKinPhone = nextOfKinPhone;
         this.nextOfKinEmail = nextOfKinEmail;
-        this.beneficiaries = beneficiaries;
-        this.beneficiariesPhone = beneficiariesPhone;
-        this.beneficiariesEmail = beneficiariesEmail;
+    }
+
+    public Client(
+        String name,
+        String address,
+        String phone,
+        String email,
+        String nextOfKin,
+        String nextOfKinPhone,
+        String nextOfKinEmail
+    ) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.nextOfKin = nextOfKin;
+        this.nextOfKinPhone = nextOfKinPhone;
+        this.nextOfKinEmail = nextOfKinEmail;
     }
 
     //getters and setters
@@ -133,34 +153,9 @@ public class Client {
         this.nextOfKinEmail = nextOfKinEmail;
     }
 
-    public String getBeneficiaries() {
-        return beneficiaries;
-    }
-
-    public void setBeneficiaries(String beneficiaries) {
-        this.beneficiaries = beneficiaries;
-    }
-
-    public String getBeneficiariesPhone() {
-        return beneficiariesPhone;
-    }
-
-    public void setBeneficiariesPhone(String beneficiariesPhone) {
-        this.beneficiariesPhone = beneficiariesPhone;
-    }
-
-    public String getBeneficiariesEmail() {
-        return beneficiariesEmail;
-    }
-
-    public void setBeneficiariesEmail(String beneficiariesEmail) {
-        this.beneficiariesEmail = beneficiariesEmail;
-    }
-
     @Override
     public String toString() {
-        return "Client [address=" + address + ", beneficiaries=" + beneficiaries + ", beneficiariesEmail="
-                + beneficiariesEmail + ", beneficiariesPhone=" + beneficiariesPhone + ", email=" + email + ", id=" + id
+        return "Client [address=" + address  + ", email=" + email + ", id=" + id
                 + ", name=" + name + ", nextOfKin=" + nextOfKin + ", nextOfKinEmail=" + nextOfKinEmail
                 + ", nextOfKinPhone=" + nextOfKinPhone + ", phone=" + phone + "]";
     }
