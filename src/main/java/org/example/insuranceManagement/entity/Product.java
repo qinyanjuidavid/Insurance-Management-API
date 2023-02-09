@@ -77,7 +77,7 @@ public class Product {
         return productName;
     }
 
-    public void setProduct_name(String productName) {
+    public void setProductName(String productName) {
         this.productName = productName;
     }
 
@@ -91,6 +91,10 @@ public class Product {
 
     public String getProductType() {
         return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 
 

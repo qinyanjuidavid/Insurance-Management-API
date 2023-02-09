@@ -1,12 +1,16 @@
 package org.example.insuranceManagement.services;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.example.insuranceManagement.entity.Product;
 import org.example.insuranceManagement.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProductService {
@@ -21,12 +25,48 @@ public class ProductService {
        return productRepository.findAll();
     }
 
-    public void addInsuranceProduct(Product product) {
+    public Product addInsuranceProduct(Product product) {
         Optional<Product> productOptional = productRepository.findByProductName(product.getProductName());
         if(productOptional.isPresent()){
             throw new IllegalStateException("Product already exists");
         }
-        productRepository.save(product);
+        Product addedProduct= productRepository.save(product);
+
+        return addedProduct;
 
     }
+
+    
+
+    public void deleteInsuranceProduct(Long productId){
+        boolean exists = productRepository.existsById(productId);
+        if(!exists){
+            throw new IllegalStateException("Product with id " + productId + " does not exist");
+        }
+        productRepository.deleteById(productId);
+    }
+
+    @Transactional
+    public Product updateInsuranceProduct(Long productId, String productName, String productType){
+        Product product = productRepository.findById(productId).orElseThrow(() -> new IllegalStateException("Product with id " + productId + " does not exist"));
+
+        if(productName != null && productName.length() > 0 && !Objects.equals(product.getProductName(), productName)){
+
+            Optional<Product> productOptional = productRepository.findByProductName(productName);
+            if(productOptional.isPresent()){
+                throw new IllegalStateException("Product name already exists");
+            }
+            System.out.println("Product name is " + productName);
+            product.setProductName(productName);
+        }
+
+        if(productType != null && productType.length() > 0 && !Objects.equals(product.getProductType(), productType)){
+            product.setProductType(productType);
+        }
+
+        return product;
+    }
+
+
+ 
 }
