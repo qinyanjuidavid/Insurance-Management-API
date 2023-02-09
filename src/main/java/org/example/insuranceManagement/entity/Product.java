@@ -11,21 +11,26 @@ import jakarta.persistence.UniqueConstraint;
 
 
 @Entity(name = "Product")
-@Table(name = "product",uniqueConstraints = {
+@Table(name = "product",
+uniqueConstraints = {
     @UniqueConstraint(name = "product_name_unique", columnNames = "product_name")
-})
+}
+)
 public class Product {
     @Id
-    @SequenceGenerator(name = "product_sequence", sequenceName = "product_sequence", allocationSize = 1)
+    @SequenceGenerator(
+        name = "product_sequence", 
+        sequenceName = "product_sequence", 
+        allocationSize = 1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "product_sequence")
     @Column(name = "id", updatable = false)
     private Long id;
     @Column(name = "product_name", nullable = false, columnDefinition = "TEXT")
-    private String product_name;
+    private String productName;
     @Column(name = "description", nullable = true, columnDefinition = "TEXT")
     private String description;
     @Column(name = "product_type", nullable = true, columnDefinition = "TEXT")
-    private String product_type;
+    private String productType;
     
     @Column(name = "price", nullable = false, columnDefinition = "float")
     private double price;
@@ -34,28 +39,28 @@ public class Product {
 
      public Product(
         Long id,
-        String product_name,
+        String productName,
         String description,
-        String product_type,
+        String productType,
         double price
     ) {
         this.id = id;
-        this.product_name = product_name;
+        this.productName = productName;
         this.description = description;
-        this.product_type = product_type;
+        this.productType = productType;
         this.price = price;
     }
 
     public Product(
     
-        String product_name,
+        String productName,
         String description,
-        String product_type,
+        String productType,
         double price
     ) {
-        this.product_name = product_name;
+        this.productName = productName;
         this.description = description;
-        this.product_type = product_type;
+        this.productType = productType;
         this.price = price;
     }
 
@@ -68,12 +73,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProduct_name(String productName) {
+        this.productName = productName;
     }
 
     public String getDescription() {
@@ -84,8 +89,8 @@ public class Product {
         this.description = description;
     }
 
-    public String getProduct_type() {
-        return product_type;
+    public String getProductType() {
+        return productType;
     }
 
 
@@ -99,8 +104,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product [description=" + description + ", id=" + id + ", price=" + price + ", product_name=" + product_name
-                + ", product_type=" + product_type + "]";
+        return "Product [description=" + description + ", id=" + id + ", price=" + price + ", product_name=" + productName
+                + ", product_type=" + productType + "]";
     }
      
     

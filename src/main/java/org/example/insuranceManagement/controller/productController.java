@@ -6,6 +6,8 @@ import org.example.insuranceManagement.entity.Product;
 import org.example.insuranceManagement.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +24,10 @@ public class productController {
     @GetMapping("/")
     public List<Product> getProducts(){
         return productService.getProducts();
+    }
+
+    @PostMapping("/")
+    public void addInsuranceProduct(@RequestBody Product product){
+        productService.addInsuranceProduct(product);
     }
 }
