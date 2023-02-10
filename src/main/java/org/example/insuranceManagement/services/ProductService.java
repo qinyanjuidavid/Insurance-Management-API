@@ -26,6 +26,7 @@ public class ProductService {
 
     public Product getInsuranceProduct(Long productId){
         Optional<Product> productOptional = productRepository.findById(productId);
+        
         if(productOptional.isEmpty()){
             throw new IllegalStateException("Product with id " + productId + " does not exist");
         }

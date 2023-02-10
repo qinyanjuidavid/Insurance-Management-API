@@ -30,7 +30,6 @@ public class productController {
         return productService.getProducts();
     }
 
-    //get product by id
     @GetMapping(path="/{productId}")
     public Product getInsuranceProduct(@PathVariable("productId") Long id){
         return productService.getInsuranceProduct(id);
@@ -46,7 +45,7 @@ public class productController {
     @DeleteMapping(path="/{productId}")
     public ResponseEntity<String> deleteInsuranceProduct(@PathVariable("productId") Long id){
         productService.deleteInsuranceProduct(id);
-        return ResponseEntity.ok("Product with id " + id + " was deleted");
+        return ResponseEntity.ok("Product was successfully deleted");
     }
 
     @PutMapping("/{productId}/")
