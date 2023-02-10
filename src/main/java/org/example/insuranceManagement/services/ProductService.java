@@ -26,6 +26,15 @@ public class ProductService {
 
     public Product addInsuranceProduct(Product product) {
         Optional<Product> productOptional = productRepository.findByProductName(product.getProductName());
+
+        if(product.getProductName() == null || product.getProductName().isEmpty()){
+            throw new IllegalStateException("Product name is required");
+        }
+
+        if(product.getProductType() == null || product.getProductType().isEmpty()){
+            throw new IllegalStateException("Product type is required");
+        }
+
         if(productOptional.isPresent()){
             throw new IllegalStateException("Product already exists");
         }

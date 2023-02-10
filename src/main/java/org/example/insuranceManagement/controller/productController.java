@@ -50,7 +50,6 @@ public class productController {
     ){
         String name=product.getProductName();
         String type=product.getProductType();
-        System.out.println("Producy;;;;;;;"+product+name);
         Product updatedProduct=productService.updateInsuranceProduct(id, name,type);
 
         return ResponseEntity.ok(updatedProduct);
