@@ -42,19 +42,19 @@ public class PolicyController {
         return ResponseEntity.ok(newPolicy);
     }
 
-    // @DeleteMapping(path="/{policyId}")
-    // public ResponseEntity<String> deletePolicy(@PathVariable("policyId") Long id){
-    //     policyService.deletePolicy(id);
-    //     return ResponseEntity.ok("Policy was successfully deleted");
-    // }
+    @DeleteMapping(path="/{policyId}")
+    public ResponseEntity<String> deletePolicy(@PathVariable("policyId") Long id){
+        policyService.deletePolicy(id);
+        return ResponseEntity.ok("Policy was successfully deleted");
+    }
 
-    // @PutMapping("/{policyId}/")
-    // public ResponseEntity<Policy> updatePolicy(
-    //     @PathVariable("policyId") Long id,
-    //     @RequestBody Policy policy
-    // ){
-    //     Policy updatedPolicy=policyService.updatePolicy(id, policy);
+    @PutMapping("/{policyId}/")
+    public ResponseEntity<Policy> updatePolicy(
+        @PathVariable("policyId") Long id,
+        @RequestBody Policy policy
+    ){
+        Policy updatedPolicy=policyService.updatePolicy(id, policy);
 
-    //     return ResponseEntity.ok(updatedPolicy);
-    // }
+        return ResponseEntity.ok(updatedPolicy);
+    }
 }

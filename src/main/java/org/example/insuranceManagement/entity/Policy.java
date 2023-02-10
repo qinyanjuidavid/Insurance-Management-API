@@ -1,6 +1,8 @@
 package org.example.insuranceManagement.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -34,18 +38,19 @@ public class Policy {
     private Product product;
     @Column(name = "policy_number", nullable = false, columnDefinition = "TEXT")
     private String policyNumber;
+    @ManyToMany
+    @JoinTable(
+        name = "policy_beneficiary",
+        joinColumns = @JoinColumn(name = "policy_id"),
+        inverseJoinColumns = @JoinColumn(name = "beneficiary_id")
+    )
+    private List<Beneficiary> beneficiaries;
     @Column(name = "issue_date", nullable = false, columnDefinition = "DATE")
     private LocalDate issueDate;
     @Column(name = "coverage_start_date", nullable = false, columnDefinition = "DATE")
     private LocalDate coverageStartDate;
     @Column(name = "coverage_end_date", nullable = false, columnDefinition = "DATE")
     private LocalDate coverageEndDate;
-    // @Column(name = "beneficiaries", nullable = true, columnDefinition = "TEXT")
-    // private String beneficiaries;
-    // @Column(name = "beneficiaries_phone", nullable = true, columnDefinition = "TEXT")
-    // private String beneficiariesPhone;
-    // @Column(name = "beneficiaries_email", nullable = true, columnDefinition = "TEXT")
-    // private String beneficiariesEmail;
 
     public Policy() {
     }
@@ -55,6 +60,7 @@ public class Policy {
         Client client,
         Product product,
         String policyNumber,
+        List<Beneficiary> beneficiaries,
         LocalDate issueDate,
         LocalDate coverageStartDate,
         LocalDate coverageEndDate
@@ -63,6 +69,7 @@ public class Policy {
         this.client = client;
         this.product = product;
         this.policyNumber = policyNumber;
+        this.beneficiaries = new ArrayList<>();
         this.issueDate = issueDate;
         this.coverageStartDate = coverageStartDate;
         this.coverageEndDate = coverageEndDate;
@@ -72,6 +79,7 @@ public class Policy {
         Client client,
         Product product,
         String policyNumber,
+        List<Beneficiary> beneficiaries,
         LocalDate issueDate,
         LocalDate coverageStartDate,
         LocalDate coverageEndDate
@@ -79,6 +87,7 @@ public class Policy {
         this.client = client;
         this.product = product;
         this.policyNumber = policyNumber;
+        this.beneficiaries = new ArrayList<>();
         this.issueDate = issueDate;
         this.coverageStartDate = coverageStartDate;
         this.coverageEndDate = coverageEndDate;
@@ -114,6 +123,14 @@ public class Policy {
 
     public void setPolicyNumber(String policyNumber) {
         this.policyNumber = policyNumber;
+    }
+
+    public List<Beneficiary> getBeneficiaries() {
+        return beneficiaries;
+    }
+
+    public void setBeneficiaries(List<Beneficiary> beneficiaries) {
+        this.beneficiaries = beneficiaries;
     }
 
     public LocalDate getIssueDate() {
