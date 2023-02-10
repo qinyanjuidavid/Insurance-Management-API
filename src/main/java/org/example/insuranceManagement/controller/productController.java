@@ -30,6 +30,12 @@ public class productController {
         return productService.getProducts();
     }
 
+    //get product by id
+    @GetMapping(path="/{productId}")
+    public Product getInsuranceProduct(@PathVariable("productId") Long id){
+        return productService.getInsuranceProduct(id);
+    }
+
     @PostMapping("/")
     public ResponseEntity<Product> addInsuranceProduct(@RequestBody Product product){
         Product addedProduct= productService.addInsuranceProduct(product);
@@ -43,7 +49,7 @@ public class productController {
         return ResponseEntity.ok("Product with id " + id + " was deleted");
     }
 
-    @PutMapping("/{productId}")
+    @PutMapping("/{productId}/")
     public ResponseEntity<Product> updateInsuranceProduct(
         @PathVariable("productId") Long id,
         @RequestBody Product product

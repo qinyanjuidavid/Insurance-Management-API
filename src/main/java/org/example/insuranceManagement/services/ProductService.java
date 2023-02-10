@@ -24,6 +24,14 @@ public class ProductService {
        return productRepository.findAll();
     }
 
+    public Product getInsuranceProduct(Long productId){
+        Optional<Product> productOptional = productRepository.findById(productId);
+        if(productOptional.isEmpty()){
+            throw new IllegalStateException("Product with id " + productId + " does not exist");
+        }
+        return productOptional.get();
+    }
+
     public Product addInsuranceProduct(Product product) {
         Optional<Product> productOptional = productRepository.findByProductName(product.getProductName());
 
