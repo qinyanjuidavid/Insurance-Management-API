@@ -1,5 +1,7 @@
 package org.example.insuranceManagement.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,7 +39,7 @@ public class Document {
         joinColumns=@JoinColumn(name="document_id"),
         inverseJoinColumns=@JoinColumn(name="policy_id")
     )
-    private Policy policy;
+    private List<Policy> policy;
 
     public Document(){}
 
@@ -45,7 +47,7 @@ public class Document {
         Long id,
         String documentName,
         String documentPath,
-        Policy policy
+        List<Policy> policy
     ){
         this.id = id;
         this.documentName = documentName;
@@ -56,7 +58,7 @@ public class Document {
        public Document(
         String documentName,
         String documentPath,
-        Policy policy
+        List<Policy> policy
     ){
         this.documentName = documentName;
         this.documentPath = documentPath;
@@ -88,11 +90,11 @@ public class Document {
         this.documentPath = documentPath;
     }
 
-    public Policy getPolicy() {
+    public List<Policy> getPolicy() {
         return policy;
     }
 
-    public void setPolicy(Policy policy) {
+    public void setPolicy(List<Policy> policy) {
         this.policy = policy;
     }
 
