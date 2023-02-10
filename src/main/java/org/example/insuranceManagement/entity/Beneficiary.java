@@ -35,9 +35,7 @@ public class Beneficiary {
     private String beneficiariesEmail;
     @Column(name="beneficiaries_relationship", nullable=false, columnDefinition="TEXT")
     private String beneficiariesRelationship;
-    @Column(name="beneficiaries_percentage", nullable=true, columnDefinition="float")
-    private String beneficiariesPercentage;
-    @Column(name="beneficiaries_id_number", nullable=false, columnDefinition="TEXT")
+    @Column(name="beneficiaries_id_number", nullable=true, columnDefinition="TEXT")
     private String beneficiariesIdNumber;
 
     public Beneficiary(){}
@@ -49,7 +47,6 @@ public class Beneficiary {
         String beneficiariesPhone,
         String beneficiariesEmail,
         String beneficiariesRelationship,
-        String beneficiariesPercentage,
         String beneficiariesIdNumber
     ){
         this.id = id;
@@ -58,7 +55,6 @@ public class Beneficiary {
         this.beneficiariesPhone = beneficiariesPhone;
         this.beneficiariesEmail = beneficiariesEmail;
         this.beneficiariesRelationship = beneficiariesRelationship;
-        this.beneficiariesPercentage = beneficiariesPercentage;
         this.beneficiariesIdNumber = beneficiariesIdNumber;
     }
 
@@ -68,7 +64,6 @@ public class Beneficiary {
         String beneficiariesPhone,
         String beneficiariesEmail,
         String beneficiariesRelationship,
-        String beneficiariesPercentage,
         String beneficiariesIdNumber
     ){
         this.beneficiariesName = beneficiariesName;
@@ -76,7 +71,6 @@ public class Beneficiary {
         this.beneficiariesPhone = beneficiariesPhone;
         this.beneficiariesEmail = beneficiariesEmail;
         this.beneficiariesRelationship = beneficiariesRelationship;
-        this.beneficiariesPercentage = beneficiariesPercentage;
         this.beneficiariesIdNumber = beneficiariesIdNumber;
     }
 
@@ -129,14 +123,6 @@ public class Beneficiary {
         this.beneficiariesRelationship = beneficiariesRelationship;
     }
 
-    public String getBeneficiariesPercentage(){
-        return beneficiariesPercentage;
-    }
-
-    public void setBeneficiariesPercentage(String beneficiariesPercentage){
-        this.beneficiariesPercentage = beneficiariesPercentage;
-    }
-
     public String getBeneficiariesIdNumber(){
         return beneficiariesIdNumber;
     }
@@ -154,7 +140,6 @@ public class Beneficiary {
             ", beneficiariesPhone='" + beneficiariesPhone + '\'' +
             ", beneficiariesEmail='" + beneficiariesEmail + '\'' +
             ", beneficiariesRelationship='" + beneficiariesRelationship + '\'' +
-            ", beneficiariesPercentage='" + beneficiariesPercentage + '\'' +
             ", beneficiariesIdNumber='" + beneficiariesIdNumber + '\'' +
         '}';
     }
