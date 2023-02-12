@@ -64,7 +64,7 @@ public class ProductService {
     }
 
     @Transactional
-    public Product updateInsuranceProduct(Long productId, String productName, String productType){
+    public Product updateInsuranceProduct(Long productId, String productName, String productType,double price, String description){
         Product product = productRepository.findById(productId).orElseThrow(() -> new IllegalStateException("Product with id " + productId + " does not exist"));
 
         if(productName != null && productName.length() > 0 && !Objects.equals(product.getProductName(), productName)){
@@ -80,6 +80,16 @@ public class ProductService {
         if(productType != null && productType.length() > 0 && !Objects.equals(product.getProductType(), productType)){
             product.setProductType(productType);
         }
+
+        if(price != 0 && !Objects.equals(product.getPrice(), price)){
+            product.setPrice(price);
+        }
+
+        if(description != null && description.length() > 0 && !Objects.equals(product.getDescription(), description)){
+            product.setDescription(description);
+        }
+
+
 
         return product;
     }

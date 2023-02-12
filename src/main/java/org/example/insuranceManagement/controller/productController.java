@@ -55,7 +55,9 @@ public class productController {
     ){
         String name=product.getProductName();
         String type=product.getProductType();
-        Product updatedProduct=productService.updateInsuranceProduct(id, name,type);
+        double price=product.getPrice();
+        String description=product.getDescription();
+        Product updatedProduct=productService.updateInsuranceProduct(id, name,type,price,description);
 
         return ResponseEntity.ok(updatedProduct);
     }
