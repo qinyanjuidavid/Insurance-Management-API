@@ -1,10 +1,13 @@
 package org.example.insuranceManagement.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.example.insuranceManagement.entity.Beneficiary;
 import org.example.insuranceManagement.services.BeneficiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,10 +46,13 @@ public class BeneficiaryController {
     }
 
     @DeleteMapping(path="/{beneficiaryId}")
-    public ResponseEntity<String> deleteBeneficiary(@PathVariable("beneficiaryId") Long id){
+    public ResponseEntity<Object> deleteBeneficiary(@PathVariable("beneficiaryId") Long id){
         beneficiaryService.deleteBeneficiary(id);
+        Map<String, String> message = new HashMap<>();
+        message.put("message","Beneficiary was successfully deleted");
         
-        return ResponseEntity.ok("Beneficiary was successfully deleted");
+        return new ResponseEntity<>(message, HttpStatus.OK);
+
     }
 
     @PutMapping("/{beneficiaryId}/")

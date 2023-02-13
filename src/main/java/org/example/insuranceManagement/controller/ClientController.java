@@ -1,10 +1,13 @@
 package org.example.insuranceManagement.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.example.insuranceManagement.entity.Client;
 import org.example.insuranceManagement.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,15 +42,20 @@ public class ClientController {
 
     @PostMapping("/")
     public ResponseEntity<Client> addClient(@RequestBody Client client){
+        System.out.println("Client: "+client);
         Client newClient= clientService.addClient(client);
 
         return ResponseEntity.ok(newClient);
     }
 
     @DeleteMapping(path="/{clientId}")
-    public ResponseEntity<String> deleteInsuranceClient(@PathVariable("clientId") Long id){
+    public ResponseEntity<Object> deleteInsuranceClient(@PathVariable("clientId") Long id){
         clientService.deleteInsuranceClient(id);
-        return ResponseEntity.ok("Client was successfully deleted");
+         Map<String, String> message = new HashMap<>();
+         message.put("message", "Product was successfully deleted");
+
+        return new ResponseEntity<>(message, HttpStatus.OK);
+
     }
 
     @PutMapping("/{clientId}/")

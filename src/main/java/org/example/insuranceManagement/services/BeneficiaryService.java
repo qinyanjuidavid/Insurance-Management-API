@@ -56,9 +56,9 @@ public class BeneficiaryService {
             throw new IllegalStateException("Beneficiary email is not in correct format");
         }
 
-        if(!beneficiary.getBeneficiariesPhone().matches("^[0-9]{10}$")){
-            throw new IllegalStateException("Beneficiary phone is not in correct format");
-        }
+        // if(!beneficiary.getBeneficiariesPhone().matches("^[0-9]{10}$")){
+        //     throw new IllegalStateException("Beneficiary phone is not in correct format");
+        // }
 
         if(beneficiary.getBeneficiariesRelationship() == null || beneficiary.getBeneficiariesRelationship().isEmpty()){
             throw new IllegalStateException("Beneficiary relationship is required");

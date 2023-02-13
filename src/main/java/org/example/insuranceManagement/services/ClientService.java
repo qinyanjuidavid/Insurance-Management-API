@@ -59,9 +59,9 @@ public class ClientService {
             throw new IllegalStateException("Client phone is required");
         }
 
-        if(!client.getPhone().matches("^[0-9]{10}$")){
-            throw new IllegalStateException("Client phone is not in correct format");
-        }
+        // if(!client.getPhone().matches("^[0-9]{10}$")){
+        //     throw new IllegalStateException("Client phone is not in correct format");
+        // }
 
         if (clientPhoneOptional.isPresent()){
             throw new IllegalStateException("Client with this phone already exists");
