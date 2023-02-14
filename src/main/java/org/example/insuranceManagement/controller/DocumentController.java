@@ -1,11 +1,15 @@
 package org.example.insuranceManagement.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.example.insuranceManagement.entity.Document;
 import org.example.insuranceManagement.services.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,41 +39,18 @@ public class DocumentController {
         return documentService.getDocument(id);
     }
 
-
-
-    // //upload document
-    // @PostMapping("/upload")
-    // public ResponseEntity<Document> uploadDocument(@RequestBody Document document, @RequestParam("file") MultipartFile file){
-    //     Document newDocument= documentService.uploadDocument(document, file);
-
-    //     return ResponseEntity.ok(newDocument);
-    // }
-
-    //sample code for uploading multiple files
-    // public static final String DIRECTORY= System.getProperty("user.dir")+"/uploads/";
-
-    // @PostMapping("/uploadMultipleFiles")
-    // public ResponseEntity<List<String>> uploadMultipleFiles(@RequestParam("files") List<MultipartFile> files) throws IOException{
-    //     List<String> fileNames= new ArrayList<>();
-    //     for (MultipartFile file: files){
-    //     String filename= StringUtils.cleanPath(file.getOriginalFilename());
-    //     Path fileStorage=get(DIRECTORY,filename).toAbsolutePath().normalize();
-    //     copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-    //     fileNames.add(filename);
-
-    //     }
-    //     return ResponseEntity.ok().body(fileNames);
-
-    // }
-
-    // private Path get(String directory2, String filename) {
-    //     return null;
-    // }
-
-    // I want to upload a document to a specific policy, and also save its path for easy access
     @PostMapping("/upload")
     public ResponseEntity<Document> uploadDocument(@RequestParam("policyId") Long policyId, @RequestParam("file") MultipartFile file){
         Document newDocument= documentService.uploadDocument(policyId, file);
         return ResponseEntity.ok(newDocument);
+    }
+
+    @DeleteMapping("/{documentId}")
+    public ResponseEntity<Object> deleteDocument(@PathVariable("documentId") Long id){
+        documentService.deleteDocument(id);
+        Map<String, String> message = new HashMap<>();
+        message.put("message","Document was successfully deleted");
+        
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }
