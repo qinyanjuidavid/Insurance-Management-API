@@ -2,13 +2,16 @@ package org.example.insuranceManagement.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -17,6 +20,9 @@ import jakarta.persistence.Table;
 @Table(name="document",
 uniqueConstraints={}
 )
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class, 
+  property = "id")
 public class Document {
     @Id
     @SequenceGenerator(
@@ -31,6 +37,8 @@ public class Document {
     private Long id;
     @Column(name="document_path", nullable=true, columnDefinition="TEXT")
     private String documentPath;
+
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "policy_id")
     private Policy policy;
