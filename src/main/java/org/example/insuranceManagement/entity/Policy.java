@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -45,12 +46,15 @@ public class Policy {
         inverseJoinColumns = @JoinColumn(name = "beneficiary_id")
     )
     private List<Beneficiary> beneficiaries;
+    @OneToMany(mappedBy = "policy")
+    private List<Document> documents;
     @Column(name = "issue_date", nullable = false, columnDefinition = "DATE")
     private LocalDate issueDate;
     @Column(name = "coverage_start_date", nullable = false, columnDefinition = "DATE")
     private LocalDate coverageStartDate;
     @Column(name = "coverage_end_date", nullable = false, columnDefinition = "DATE")
     private LocalDate coverageEndDate;
+
 
     public Policy() {
     }
@@ -94,7 +98,7 @@ public class Policy {
     }
     // Getters and Setters
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -102,7 +106,7 @@ public class Policy {
     }
 
     public Client getClient() {
-        return client;
+        return this.client;
     }
 
     public void setClient(Client client) {
@@ -110,7 +114,7 @@ public class Policy {
     }
 
     public Product getProduct() {
-        return product;
+        return this.product;
     }
 
     public void setProduct(Product product) {
@@ -118,7 +122,7 @@ public class Policy {
     }
 
     public String getPolicyNumber() {
-        return policyNumber;
+        return this.policyNumber;
     }
 
     public void setPolicyNumber(String policyNumber) {
@@ -126,7 +130,7 @@ public class Policy {
     }
 
     public List<Beneficiary> getBeneficiaries() {
-        return beneficiaries;
+        return this.beneficiaries;
     }
 
     public void setBeneficiaries(List<Beneficiary> beneficiaries) {
@@ -134,34 +138,50 @@ public class Policy {
     }
 
     public LocalDate getIssueDate() {
-        return issueDate;
+        return this.issueDate;
     }
 
     public void setIssueDate(LocalDate issueDate) {
         this.issueDate = issueDate;
     }
 
-    public CharSequence getCoverageStartDate() {
-        return coverageStartDate.toString();
+    public LocalDate getCoverageStartDate() {
+        return this.coverageStartDate;
     }
 
     public void setCoverageStartDate(LocalDate coverageStartDate) {
         this.coverageStartDate = coverageStartDate;
     }
 
-    public CharSequence getCoverageEndDate() {
-        return coverageEndDate.toString();
+    public LocalDate getCoverageEndDate() {
+        return this.coverageEndDate;
     }
 
     public void setCoverageEndDate(LocalDate coverageEndDate) {
         this.coverageEndDate = coverageEndDate;
     }
 
+    public List<Document> getDocuments() {
+        return this.documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
 
     @Override
     public String toString() {
-        return "Policy [client=" + client + ", coverageEndDate=" + coverageEndDate + ", coverageStartDate="
-                + coverageStartDate + ", id=" + id + ", issueDate=" + issueDate + ", policyNumber=" + policyNumber
-                + ", product=" + product + "]";
+        return "{" +
+            " id='" + getId() + "'" +
+            ", client='" + getClient() + "'" +
+            ", product='" + getProduct() + "'" +
+            ", policyNumber='" + getPolicyNumber() + "'" +
+            ", beneficiaries='" + getBeneficiaries() + "'" +
+            ", issueDate='" + getIssueDate() + "'" +
+            ", coverageStartDate='" + getCoverageStartDate() + "'" +
+            ", coverageEndDate='" + getCoverageEndDate() + "'" +
+            "}";
     }
+
+
 }
